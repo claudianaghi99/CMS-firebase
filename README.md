@@ -1,4 +1,4 @@
-# CMS - Fire
+# CMS - Firebase
 
 Integrate Firebase over the Employee CMS you've demoed.
 
