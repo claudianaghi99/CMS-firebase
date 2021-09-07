@@ -1,0 +1,236 @@
+* {
+    margin: 0;
+    padding:0;
+    box-sizing: border-box;
+    font-family: 'Nunito', sans-serif;
+    color:black;
+    padding-left: 0.25%;
+    padding-right: 0.25%;
+} 
+
+.contents {
+    display: flex;
+}
+
+/*Header*/
+h1 {
+    text-align: center;
+    padding-top: 1%;
+    padding-bottom: 1%;
+    color: white;
+}
+
+.contents .left-part h2 {
+    padding-top: 2%;
+    text-align: center;
+}
+
+.contents .right-part h2 {
+    padding-top: 1%;
+    text-align: center;
+}
+
+/*Left part of the page*/
+.contents .left-part {
+    width: 35%;
+    background-color: white;
+    border-radius: 15px;
+    padding-bottom: 5px;
+    padding-top: 5px; 
+}
+.contents .left-part:hover {
+    box-shadow: 0.3px 0.3px 3px 3px #929597;
+}
+input {
+    padding-left: 1%;
+    width: 97%;
+    line-height: 2rem;
+    border-radius: 8px;
+    background-color: white;
+}
+input:hover {
+    box-shadow: 0.1px 0.1px 2px 2px #c7c8c9;
+}
+#file {
+    background-color: white;
+}
+
+.myForm {
+    padding-left: 1%;
+    
+}
+.myForm label {
+    font-size: 150%;
+}
+.photo input:hover {
+    box-shadow: 0.1px 0.1px 2px 2px white;
+}
+.myForm .sex-select select {
+    margin:2%;
+    font-size:100%;
+    border-radius: 8px;
+    border-width: 2px;
+    border-color: rgb(88, 87, 87);
+}
+.myForm .sex-list:hover {
+    box-shadow: 0.1px 0.1px 2px 2px #c7c8c9;
+}
+.submit-input {
+    padding-bottom: 2%;
+}
+
+/*Middle part*/
+.contents .middle-part {
+    padding-left: 1%;
+}
+
+/*Right part*/
+.contents .right-part {
+    width: 60rem;
+    background-color: white;
+    border-radius: 15px;
+    padding-left: 1%;
+    padding-right: 1.5%;
+}
+
+.contents .right-part:hover {
+    box-shadow: 0.3px 0.3px 3px 3px #929597;
+}
+
+table,
+tr,
+th,
+td {
+    border: 0.5px solid black;
+    text-align: center;
+    border-collapse: collapse;
+}
+
+.table-first-line th, tr,td {
+    padding: 7px;
+}
+
+.div-table {
+    padding-top: 1.5rem;
+    padding-left: 1%;
+    padding-right: 0%;
+}
+
+thead .table-first-line .first-name-cell {
+    padding-left: 2rem;
+    padding-right: 2rem;
+}
+
+thead .table-first-line .last-name-cell {
+    padding-left: 2rem;
+    padding-right: 2rem;
+}  
+
+thead .table-first-line .email-cell {
+    padding-left: 7rem;
+    padding-right: 7rem;
+}
+
+thead .table-first-line .birthday-cell {
+    padding-left: 2rem;
+    padding-right: 2rem;
+}
+
+thead .table-first-line .sex-cell {
+    padding-left: 2rem;
+    padding-right: 2rem;
+}
+
+thead .table-first-line .delete-cell {
+    padding-left: 2rem;
+    padding-right: 2rem;
+}
+
+.filter-search {
+    padding-left: 0.7%;
+}
+
+.filter-search input {
+    padding-left: 1%;
+    width: 100%;
+}
+
+.filter-search input:hover {
+    box-shadow: 0.2px 0.2px 2px 2px #b9b9b9;;
+}
+
+.right-part .filter-search label {
+    display: block;
+    padding-bottom: 1%;
+}
+.sort-select {
+    display:flex;
+    padding-left: 0.7%;
+}
+
+.sort-select label {
+    padding-right: 1%;
+}
+
+/*Background*/
+.css-selector {
+    background: linear-gradient(270deg, #355c7d, #6c5b7b, #c06c84);
+    background-size: 600% 600%;
+
+    -webkit-animation: AnimationName 27s ease infinite;
+    -moz-animation: AnimationName 27s ease infinite;
+    -o-animation: AnimationName 27s ease infinite;
+    animation: AnimationName 27s ease infinite;
+}
+
+@-webkit-keyframes AnimationName {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+@-moz-keyframes AnimationName {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+@-o-keyframes AnimationName {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+@keyframes AnimationName {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+
+@media(max-width: 800px) {
+
+    .contents {
+        display: grid;
+        grid-template-columns: 1fr;
+
+    }
+    .contents .left-part {
+        width: 100%;
+    }
+
+    .contents .right-part {
+        height: 110%;
+    }
+}
+
+@media(min-width:1600px){
+    .contents .right-part {
+        width: 150%;
+        height: 55rem;
+    }
+
+    .contents .right-part table{
+        width: 100%;
+    }
+
+    .contents .left-part input{
+        height: 5rem;
+    }
+}

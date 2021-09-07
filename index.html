@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="stylesheets/style.css">
+    <link rel="icon" href="images/icon.png">
+    <title>CMS</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@700&family=Nunito:wght@800&display=swap" rel="stylesheet">
+    <script src="scripts/main.js"></script>
+    <script src="https://kit.fontawesome.com/b21073efe8.js" crossorigin="anonymous"></script>
+    <script src="lib/moment/moment.min.js"></script>
+</head>
+<body class="css-selector" onload="loadData();">
+    <div>
+        <h1>Content Management System</h1>
+    </div>
+    <div class="contents">
+     <div class="left-part">
+        <div class="heading">
+            <h2>Employee Information</h2>
+        </div>
+        <div class ="employee-info">
+
+        <div name="myForm" class="myForm">
+            <div>
+                <br>
+                <label for="firstname">First name</label>
+                <input type="text" name="fname" id="fname" placeholder="First name" onfocus="this.placeholder = ' ' " onblur=" this.placeholder = 'First name'" required>    
+            </div>
+
+            <div>
+                <br>
+                <label for="lastname">Last name</label>
+                <input type="text" name="lname" id="lname" placeholder="Last name" onfocus="this.placeholder = ' ' " onblur=" this.placeholder = 'Last name'" required>
+            </div>
+
+            <div>
+                <br>
+                <label for="email">E-mail</label>
+                <input type="email" name="email" id="email" placeholder="E-mail" onfocus="this.placeholder = ' ' " onblur=" this.placeholder = 'E-mail'" required>
+            </div>
+
+            <div class="sex-select">
+                <br>
+                <label for="sex">Sex</label>
+                <select id="sex-list" class="sex-list" required>
+                    <option value="">None</option>
+                    <option value="Female">Female</option>
+                    <option value="Male">Male</option>
+                </select>
+            </div>
+
+            <div>
+                <br>
+                <label for="birthday">Date of birth</label>
+                <input type="date" id="birthday" name="birthday" required>    
+            </div>
+
+            <div class="photo">
+                <br>
+                <label for="photo">Photo</label>
+                <input type="file" src="">
+                
+            </div>
+
+            <div class="submit-input">
+                <br>
+                <input style="height:50px; font-size:120%;" id="submit" type="submit" value="Submit" onclick="addRow();" >
+            </div>
+         </div>
+        </div>
+    </div>
+
+    <div class="middle-part">
+        <br>
+    </div>
+
+    <div class="right-part">
+        <h2>Employees</h2>
+        <div class="filter-search">
+            <label for="search">Filter by name</label>
+            <input type="text" name="search" id="search" placeholder="Search..." onfocus="searchFunction();this.placeholder ='';"
+             onblur=" this.placeholder = 'Search...'">
+        </div>
+        <br>
+            <div class="sort-select">
+                <br>
+                <label for="sort">Sort by:</label>
+                <select id="sort-list" onchange="selectedOption()">
+                    <option value=" ">None</option>
+                    <option value="alphabetically">Alphabetically</option>
+                </select>
+            </div>
+            
+            <div class="div-table">
+            <table id="table">
+                <thead>
+                    <tr class="table-first-line">
+                        <th class="first-name-cell">First Name</th>   
+                        <th class="last-name-cell">Last Name</th>
+                        <th class="email-cell">E-mail</th>
+                        <th class="sex-cell">Sex</th>
+                        <th class="birthday-cell">Date of Birth</th>
+                        <th class="delete-cell">
+                            <i class="fas fa-trash-alt"></i>
+                        </th>
+                    </tr>
+                </thead>
+                
+                <tbody id="tbody">
+                    <tr>
+                        <td>Claudia-Maria</td>
+                        <td>Naghi</td>
+                        <td>claudia.naghi@principal33.com</td>
+                        <td>Female</td>
+                        <td>11 September 1999</td>
+                        <td><input type="button" name="delete" value="Delete" onclick="deleteRow(this);" class="btn btn-danger"></td>
+                    </tr>
+                    <tr>
+                        <td>Ana</td>
+                        <td>Valean</td>
+                        <td>ana.valean@gmail.com</td>
+                        <td>Female</td>
+                        <td>20 January 1990</td>
+                        <td><input type="button" name="delete" value="Delete" onclick="deleteRow(this);" class="btn btn-danger"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    </div>
+    <script type="module">
+        
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.0.1/firebase-app.js';
+        import { } from 'https://www.gstatic.com/firebasejs/9.0.1/firebase-database.js';
+        
+        const firebaseConfig={
+            apiKey: "AIzaSyByykoIg2boC-LDjRiSmXgWiyL63hOwqqk",
+            authDomain: "cmd-firebase.firebaseapp.com",
+            projectId: "cmd-firebase",
+            storageBucket: "cmd-firebase.appspot.com",
+            messagingSenderId: "334353837414",
+            appId: "1:334353837414:web:7a4b0fc6737f1ed2892ca7",
+            measurementId: "G-1CKRBDFG91",
+        };
+        
+        const firebaseApp = initializeApp(firebaseConfig);
+        
+        
+              </script>
+</body>
+</html>
