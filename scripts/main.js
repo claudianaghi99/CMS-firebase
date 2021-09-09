@@ -1,7 +1,7 @@
 import {initializeApp} from "https://www.gstatic.com/firebasejs/9.0.1/firebase-app.js";
-        import {getFirestore, doc, setDoc, getDoc, getDocs, collection, deleteDoc, query, where, orderBy} from "https://www.gstatic.com/firebasejs/9.0.1/firebase-firestore.js";      
+import {getFirestore, doc, setDoc, getDoc, getDocs, collection, deleteDoc, query, where, orderBy} from "https://www.gstatic.com/firebasejs/9.0.1/firebase-firestore.js";      
          
-const firebaseConfig={
+const firebaseConfig= {
      apiKey: "AIzaSyByykoIg2boC-LDjRiSmXgWiyL63hOwqqk",
      authDomain: "cmd-firebase.firebaseapp.com",
      projectId: "cmd-firebase",
@@ -14,7 +14,6 @@ const firebaseConfig={
 const app= initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-
 // get all data from firebase
 async function getAllData() {
     const querySnapshot = await getDocs(collection(db, "employees"));
@@ -23,15 +22,12 @@ async function getAllData() {
 }
 getAllData();
 
-
 // put the data in the table
 function putData(querySnapshot) {
-
     var j = 1;
     querySnapshot.forEach((doc) => {
 
         var row= table.insertRow(j);
-
         row.id = doc.data()["fname"]+"row";
         
         var cellNume = row.insertCell();
@@ -67,8 +63,7 @@ function removeData(table) {
     }
 }
 // set the delete for every employee
-function setEventListenerDelete(){
-    
+function setEventListenerDelete() {
    var drop = document.getElementsByClassName('btn btn-danger');
     for (var i = 0; i < drop.length; i++) {
         drop[i].addEventListener("click", function() {
@@ -76,9 +71,9 @@ function setEventListenerDelete(){
             document.getElementById(`${this.id}row`).remove();
         });
     }
-
-    
 }
+
+// template to add more easily a document
 
 // await setDoc(doc(db, "employees", "Alexandra"), {
 //   fname: "Alexandra",
@@ -90,12 +85,13 @@ function setEventListenerDelete(){
 
 // ad an employee
 
-document.getElementById("submitButton").addEventListener("click", function(){
+document.getElementById("submitButton").addEventListener("click", function() {
     var fname_cms = document.getElementById("fname").value;
     var lname_cms = document.getElementById("lname").value;
     var email_cms = document.getElementById("email").value;
     var sex_cms = document.getElementById("sex-list").value;
     var birthday_cms = document.getElementById("birthday").value;
+
     if(fname_cms == "") {
         alert("Completati numele");
     } else {
@@ -106,6 +102,7 @@ document.getElementById("submitButton").addEventListener("click", function(){
         sex: sex_cms,
         birthday: birthday_cms
     });
+
     document.getElementById("fname").value = "";
     document.getElementById("lname").value = "";
     document.getElementById("email").value = "";
@@ -114,12 +111,9 @@ document.getElementById("submitButton").addEventListener("click", function(){
     
     removeData(table);
     getAllData();
-;
-}
-});
+}});
 
-
-// clear data from search bar
+// clear data 
 document.getElementById("query").addEventListener("change", function() {
     if(document.getElementById("query").value == "") {
         removeData(table);
