@@ -156,25 +156,13 @@ function validate(inputID, string) {
     input.reportValidity();
 }
 
-
-
 function validate_age(inputID) {
     const input = document.getElementById(inputID);
     input.setCustomValidity("You must be older than 16 years old.");
     input.reportValidity();
 }
 
-// template to add more easily a document
-
-// await setDoc(doc(db, "employees", ""), {
-//   fname: "",
-//   lname: "Naghi",
-//   email: "maria@yahoo.com",
-//   sex: "female",
-//   birthday: "11 Septermber 1999",
-// });
-
-// sortare dupa nume
+// name sort
 document.getElementById("sort-list").addEventListener("change", async function() {
     var sortValue = document.getElementById("sort-list").value;
     if(sortValue == " "){
@@ -198,12 +186,17 @@ document.getElementById("sort-list").addEventListener("change", async function()
     }
 });
 
-// //search
-// document.getElementById("search").addEventListener("mouseout", async function() {
-//     var searchString = document.getElementById("search").value;
-//     removeData(table);
-//     const q = query(collection(db, "employees"), where("fname", "==", searchString));
-//     const querySnapshot = await getDocs(q);
-//     putData(querySnapshot);
-//     //console.log("ok")
-// });
+//search
+document.getElementById("search").addEventListener("change", async function() {
+    if(document.getElementById("search").value == "") {
+        removeData(table);
+        getAllData();
+    } else {
+    var searchString = document.getElementById("search").value;
+    removeData(table);
+    const q = query(collection(db, "employees"), where("fname", "==", searchString));
+    const querySnapshot = await getDocs(q);
+    putData(querySnapshot);
+    }
+});
+
