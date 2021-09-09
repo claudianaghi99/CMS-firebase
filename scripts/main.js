@@ -1,7 +1,7 @@
 import {initializeApp} from "https://www.gstatic.com/firebasejs/9.0.1/firebase-app.js";
 import {getFirestore, doc, setDoc, getDoc, getDocs, collection, deleteDoc, query, where, orderBy} from "https://www.gstatic.com/firebasejs/9.0.1/firebase-firestore.js";      
          
-const firebaseConfig= {
+const firebaseConfig = {
      apiKey: "AIzaSyByykoIg2boC-LDjRiSmXgWiyL63hOwqqk",
      authDomain: "cmd-firebase.firebaseapp.com",
      projectId: "cmd-firebase",
@@ -15,7 +15,6 @@ const app= initializeApp(firebaseConfig);
 const db = getFirestore(app);
 var table = document.getElementById("table");
 
-// get all data from firebase
 async function getAllData() {
     const querySnapshot = await getDocs(collection(db, "employees"));
     putData(querySnapshot);
@@ -23,7 +22,6 @@ async function getAllData() {
 }
 getAllData();
 
-// put the data in the table
 function putData(querySnapshot) {
     var j = 1;
     querySnapshot.forEach((doc) => {
@@ -65,9 +63,9 @@ function removeData(table) {
 }
 // set the delete for every employee
 function setEventListenerDelete() {
-   var drop = document.getElementsByClassName('btn btn-danger');
-    for (var i = 0; i < drop.length; i++) {
-        drop[i].addEventListener("click", function() {
+   var button = document.getElementsByClassName('btn btn-danger');
+    for (var i = 0; i < button.length; i++) {
+        button[i].addEventListener("click", function() {
             deleteDoc(doc(db, "employees", this.id));
             document.getElementById(`${this.id}row`).remove();
         });
@@ -165,20 +163,17 @@ function validate_age(inputID) {
 // name sort
 document.getElementById("sort-list").addEventListener("change", async function() {
     var sortValue = document.getElementById("sort-list").value;
-    if(sortValue == " "){
+    if(sortValue == " ") {
         removeData(table);
         getAllData();
-    }else
-    if(sortValue == "asc-alphabetically") {
+    } else if (sortValue == "asc-alphabetically") {
       removeData(table);
         const q = query(collection(db, "employees"), orderBy("fname", "asc"));
         const querySnapshot = await getDocs(q);
         putData(querySnapshot);
-        console.log("ok");
     } else {
         removeData(table);
-       // getAllData();
-        if(sortValue=="desc-alphabetically"){
+        if(sortValue == "desc-alphabetically") {
             const q = query(collection(db, "employees"), orderBy("fname", "desc"));
             const querySnapshot = await getDocs(q);
             putData(querySnapshot);
