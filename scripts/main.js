@@ -1,100 +1,197 @@
+import {initializeApp} from "https://www.gstatic.com/firebasejs/9.0.1/firebase-app.js";
+        import {getFirestore, doc, setDoc, getDoc, getDocs, collection, deleteDoc, query, where, orderBy} from "https://www.gstatic.com/firebasejs/9.0.1/firebase-firestore.js";      
+         
+const firebaseConfig={
+     apiKey: "AIzaSyByykoIg2boC-LDjRiSmXgWiyL63hOwqqk",
+     authDomain: "cmd-firebase.firebaseapp.com",
+     projectId: "cmd-firebase",
+     storageBucket: "cmd-firebase.appspot.com",
+     messagingSenderId: "334353837414",
+     appId: "1:334353837414:web:7a4b0fc6737f1ed2892ca7",
+     measurementId: "G-1CKRBDFG91",
+};
 
-function getData() {
-    var str = localStorage.getItem("localData");
-    if(str!=null) {
-        arr = JSON.parse(str);
-    }
+const app= initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+
+// get all data from firebase
+async function getAllData() {
+    const querySnapshot = await getDocs(collection(db, "employees"));
+    putData(querySnapshot);
+    setEventListenerDelete();
 }
+getAllData();
 
-var arr = new Array();
-//const regex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
-function addRow() { //addData
+// put the data in the table
+function putData(querySnapshot) {
 
-    getData();
-    // get input values 
-    arr.push({
-        fname : document.getElementById("fname").value,
-        lname : document.getElementById("lname").value,
-        email : document.getElementById("email").value,
-        sex : document.getElementById("sex-list").value,
-        birthday:  document.getElementById("birthday").value
-       // formatBirthday : moment(document.getElementById('birthday').value)
+    var j = 1;
+    querySnapshot.forEach((doc) => {
+
+        var row= table.insertRow(j);
+
+        row.id = doc.data()["fname"]+"row";
+        
+        var cellNume = row.insertCell();
+        cellNume.setAttribute("class", "td-paddings");
+        //cellNume.innerHTML = doc.data()["fname"];
+        cellNume.innerHTML = doc.data()["fname"];
+        
+        var cellPrenume = row.insertCell();
+        cellPrenume.setAttribute("class", "td-paddings");
+        cellPrenume.innerHTML = doc.data()["lname"];
+
+        var cellEmail = row.insertCell();
+        cellEmail.setAttribute("class", "td-paddings");
+        cellEmail.innerHTML = doc.data()["email"];
+
+        var cellSex = row.insertCell();
+        cellSex.setAttribute("class", "td-paddings");
+        cellSex.innerHTML = doc.data()["sex"];
+
+        var cellBirthday= row.insertCell();
+        cellBirthday.setAttribute("class", "td-paddings");
+        cellBirthday.innerHTML = doc.data()["birthday"];
+
+        var cellDelete = row.insertCell();
+        cellDelete.innerHTML = `<input type="button" value="Delete" id="${doc.data()["fname"]}" class="btn btn-danger">`;
+        j++;
     });
+}
+
+// set the delete for every employee
+function setEventListenerDelete(){
     
-    // if (arr[0].fname== "") {
-    //     validate('fname','You must fill this out.');
-    //     return false;
-    // }
+   var drop = document.getElementsByClassName('btn btn-danger');
+    for (var i = 0; i < drop.length; i++) {
+        drop[i].addEventListener("click", function() {
+            deleteDoc(doc(db, "employees", this.id));
+            document.getElementById(`${this.id}row`).remove();
+        });
+    }
 
-    // if (arr[1].lname == "") {
-    //     validate('lname','You must fill this out.');
-    //     return false;
-    // }
+    
+}
 
-    // if (arr[2].email == "") {
-    //     validate('email','You must fill this out.');
-    //     return false;
-    // }
+// await setDoc(doc(db, "employees", "Alexandra"), {
+//   fname: "Alexandra",
+//   lname: "Naghi",
+//   email: "maria@yahoo.com",
+//   sex: "female",
+//   birthday: "11 Septermber 1999",
+// });
 
-    // if (arr[3].sex == "") {
-    //     validate('sex-list','You must choose an option.');
-    //     return false;
-    // }
 
-    // if (arr[4].birthday == "") {
-    //     validate('birthday','You must choose a date.');
-    //     return false;
-    // } 
 
-    // var birthdate = new Date(document.getElementById('birthday').value)
-    // if(calculateAge(birthdate) < 16) { 
-    //     validate_age('birthday');
-    //     return false;
-    // }
+
+
+
+
+
+
+
+
+
+
+
+// function getData() {
+//     var str = localStorage.getItem("localData");
+//     if(str!=null) {
+//         arr = JSON.parse(str);
+//     }
+// }
+
+// var arr = new Array();
+// //const regex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+// function addRow() { //addData
+
+//     getData();
+//     // get input values 
+//     arr.push({
+//         fname : document.getElementById("fname").value,
+//         lname : document.getElementById("lname").value,
+//         email : document.getElementById("email").value,
+//         sex : document.getElementById("sex-list").value,
+//         birthday:  document.getElementById("birthday").value
+//        // formatBirthday : moment(document.getElementById('birthday').value)
+//     });
+    
+//     // if (arr[0].fname== "") {
+//     //     validate('fname','You must fill this out.');
+//     //     return false;
+//     // }
+
+//     // if (arr[1].lname == "") {
+//     //     validate('lname','You must fill this out.');
+//     //     return false;
+//     // }
+
+//     // if (arr[2].email == "") {
+//     //     validate('email','You must fill this out.');
+//     //     return false;
+//     // }
+
+//     // if (arr[3].sex == "") {
+//     //     validate('sex-list','You must choose an option.');
+//     //     return false;
+//     // }
+
+//     // if (arr[4].birthday == "") {
+//     //     validate('birthday','You must choose a date.');
+//     //     return false;
+//     // } 
+
+//     // var birthdate = new Date(document.getElementById('birthday').value)
+//     // if(calculateAge(birthdate) < 16) { 
+//     //     validate_age('birthday');
+//     //     return false;
+//     // }
        
-    // if(regex.test(String(email).toLowerCase())) {
-    // } else {
-    //     validate('email','Invalid e-mail address.');
-    //     return false;
-    // }
-    localStorage.setItem("localData", JSON.stringify(arr));
-    location.reload();
-}
+//     // if(regex.test(String(email).toLowerCase())) {
+//     // } else {
+//     //     validate('email','Invalid e-mail address.');
+//     //     return false;
+//     // }
+//     localStorage.setItem("localData", JSON.stringify(arr));
+//     location.reload();
+// }
 
-function loadData(){ //showData
+// function loadData(){ //showData
 
-    getData();
+//     getData();
 
-    var table = document.getElementById('table').getElementsByTagName('tbody')[0];
-    for(i=0;i<arr.length;i++)
-      {
+//     var table = document.getElementById('table').getElementsByTagName('tbody')[0];
+//     for(i=0;i<arr.length;i++)
+//       {
 
-        var row= table.insertRow();
-        var cell1 = row.insertCell();
-        var cell2 = row.insertCell();
-        var cell3 = row.insertCell();
-        var cell4 = row.insertCell();
-        var cell5 = row.insertCell();
-        var cell6 = row.insertCell();
-        cell1.innerHTML = arr[i].fname;
-        cell2.innerHTML = arr[i].lname;
-        cell3.innerHTML = arr[i].email;
-        cell4.innerHTML = arr[i].sex;
-        cell5.innerHTML = arr[i].birthday;
-        cell6.innerHTML = '<input type="button" value="Delete" onclick="deleteRoww();" class="btn btn-danger">';
-      }
-}
-function deleteRoww() {
-    var index;
-    var table = document.getElementById('table');
-    for ( var i = 1; i < table.rows.length; i++) {
-            table.rows[i].cells[5].onclick = function () {
-            index = this.parentElement.rowIndex;
-            table.deleteRow(index);
-        };
-    } 
-}
+//         var row= table.insertRow();
+//         var cell1 = row.insertCell();
+//         var cell2 = row.insertCell();
+//         var cell3 = row.insertCell();
+//         var cell4 = row.insertCell();
+//         var cell5 = row.insertCell();
+//         var cell6 = row.insertCell();
+//         cell1.innerHTML = arr[i].fname;
+//         cell2.innerHTML = arr[i].lname;
+//         cell3.innerHTML = arr[i].email;
+//         cell4.innerHTML = arr[i].sex;
+//         cell5.innerHTML = arr[i].birthday;
+//         cell6.innerHTML = '<input type="button" value="Delete" onclick="deleteRoww();" class="btn btn-danger">';
+//       }
+// }
+// function deleteRoww() {
+//     var index;
+//     var table = document.getElementById('table');
+//     for ( var i = 1; i < table.rows.length; i++) {
+//             table.rows[i].cells[5].onclick = function () {
+//             index = this.parentElement.rowIndex;
+//             table.deleteRow(index);
+//         };
+//     } 
+// }
 // function deleteRoww() {
 
 //     getData();
