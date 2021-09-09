@@ -61,6 +61,11 @@ function putData(querySnapshot) {
     });
 }
 
+function removeData(table) {
+    for (var i = table.childNodes[1].childElementCount-1; i >0; i--) {
+        table.deleteRow(i);
+    }
+}
 // set the delete for every employee
 function setEventListenerDelete(){
     
@@ -83,9 +88,44 @@ function setEventListenerDelete(){
 //   birthday: "11 Septermber 1999",
 // });
 
+// ad an employee
+
+document.getElementById("submitButton").addEventListener("click", function(){
+    var fname_cms = document.getElementById("fname").value;
+    var lname_cms = document.getElementById("lname").value;
+    var email_cms = document.getElementById("email").value;
+    var sex_cms = document.getElementById("sex-list").value;
+    var birthday_cms = document.getElementById("birthday").value;
+    if(fname_cms == "") {
+        alert("Completati numele");
+    } else {
+    setDoc(doc(db,"employees",`${fname_cms}`), {
+        fname: fname_cms,
+        lname: lname_cms,
+        email: email_cms,
+        sex: sex_cms,
+        birthday: birthday_cms
+    });
+    document.getElementById("fname").value = "";
+    document.getElementById("lname").value = "";
+    document.getElementById("email").value = "";
+    document.getElementById("sex-list").value = "";
+    document.getElementById("birthday").value = "";
+    
+    removeData(table);
+    getAllData();
+;
+}
+});
 
 
-
+// clear data from search bar
+document.getElementById("query").addEventListener("change", function() {
+    if(document.getElementById("query").value == "") {
+        removeData(table);
+        getAllData();
+    }
+});
 
 
 
