@@ -85,16 +85,17 @@
         <h2>Employees</h2>
         <div class="filter-search">
             <label for="search">Filter by name</label>
-            <input type="text" name="search" id="search" placeholder="Search..." onfocus="searchFunction();this.placeholder ='';"
+            <input type="search" name="search" id="search" placeholder="Search..." onfocus="this.placeholder ='';"
              onblur=" this.placeholder = 'Search...'">
         </div>
         <br>
             <div class="sort-select">
                 <br>
                 <label for="sort">Sort by:</label>
-                <select id="sort-list" onchange="selectedOption()">
+                <select id="sort-list">
                     <option value=" ">None</option>
-                    <option value="alphabetically">Alphabetically</option>
+                    <option value="asc-alphabetically">Ascending alphabetically</option>
+                    <option value="desc-alphabetically">Descending alphabetically</option>
                 </select>
             </div>
             
